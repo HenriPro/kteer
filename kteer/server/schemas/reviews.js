@@ -1,16 +1,16 @@
 var mongoose= require ("mongoose");
 
 var ReviewSchema = new mongoose.Schema({
-    userId:{
-      type: String,
+  userId:{
+    type: String,
     required: true
   },
   rating:{
-      type: Number,
+    type: Number,
     required: true
   },
   textReview:{
-      type: String,
+    type: String,
     required: true
   }
 });

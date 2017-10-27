@@ -5,25 +5,25 @@ var ListingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  desc:{
+  description:{
     type:String,
     required:true
   },
-  picture:{
-     type:Array,
-    required:true
+  owner:{
+    type: String,
+    required: true  
+  },
+  pictures:{
+    type:Array,
+    required:false
   },
   pricing:{
     type:Number,
-    required:true
-  },
-    contract :{
-      type     : Array,
-        required : true
+    required:false
   },
   category: {
     type: String,
-    required: true
+    required: false
   }
 });
 
