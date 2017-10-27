@@ -6,34 +6,15 @@
 <div>
   <h3 class="d-flex justify-content-center">Feautured Listings</h3>
 </div>
-<div>
-    <alert type="success">hello</alert>
-    
-  <div *ngFor="let listing of selectedListings" class="card-group">
-    <app-listings-entry  class="card" ></app-listings-entry>
+
+<div class="container">
+ <div class="row card-group">      
+    <div *ngFor="let listing of selectedListings" class="col-3">
+      <app-listings-entry  class="card" ></app-listings-entry>
+    </div>
   </div>
 </div>
 
 
 
-
-<accordion>
-    <accordion-group heading="Static Header, initially expanded">
-      This content is straight in the template.
-    </accordion-group>
-    <accordion-group #group>
-      <div accordion-heading>
-        I can have markup, too!
-        <i class="pull-right float-xs-right glyphicon"
-           [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
-      </div>
-      This is just some content to illustrate fancy headings.
-    </accordion-group>
-    <accordion-group heading="Content 1">
-      <p>Content 1</p>
-    </accordion-group>
-    <accordion-group heading="Content 2">
-      <p>Content 2</p>
-    </accordion-group>
-  </accordion>
 
