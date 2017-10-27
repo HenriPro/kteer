@@ -1,26 +1,36 @@
 var express = require('express')
 var mongoose = require('mongoose');
 var server = require('http').createServer(app);//
-var port = process.env.PORT || 3000;//
+var bodyParser = require('body-parser');
+var api = require('./api');
+
 var app = express();
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
-require('./config/middleware.js') (app,express); //
-require('./config/routes.js') (app,express); //
+app.use(express.static(__dirname + '/../dist'));
+
 
 /////////////////////database//////////////////////////
-var mongoURI = process.env.MONGODB_URI ||'mongodb://localhost/WarshahDB';
-  mongoose.Promise = global.Promise;
+var mongoURI = 'mongodb://localhost/kteerdb';
+mongoose.Promise = global.Promise;
 mongoose.connect(mongoURI);
 db = mongoose.connection;
-db.once('open',function () {
+db.once('open', function () {
 	console.log('mongoDB is open');
 });
 
+app.use('/api', api);
 
+app.get("*", ()=>{
+	//TODO
+})
 
 
 ////////////////////server////////////////////////////
+var port = process.env.PORT || 3000;//
+
 app.listen(port, function () {
   console.log(' app listening on port 3000!');//
-})
+});
