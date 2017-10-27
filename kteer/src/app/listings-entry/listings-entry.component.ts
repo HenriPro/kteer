@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
+
 @Component({
   selector: 'app-listings-entry',
   templateUrl: './listings-entry.component.html',
