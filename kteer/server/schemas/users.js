@@ -23,7 +23,7 @@ var UserSchema = new mongoose.Schema({
         type     : String,
         required : false
     },
-    listing :{
+    listings :{
       type     : Array,
       required : false
   }
