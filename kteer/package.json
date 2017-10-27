@@ -21,11 +21,8 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-<<<<<<< HEAD
     "body-parser": "^1.18.2",
-=======
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
->>>>>>> 1c0f61bf1060dad3bb6cc5e07d168353c816144e
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.14"
