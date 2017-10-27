@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // must import each bootstrap component here
 import { AlertModule } from 'ngx-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     BrowserModule,
     // also add here
     AlertModule.forRoot(),
+    AccordionModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
