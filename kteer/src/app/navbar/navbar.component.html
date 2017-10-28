@@ -1,15 +1,15 @@
 <div >
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Kteer</a>
+        <a class="navbar-brand" routerLink="">Kteer</a>
         <div class="navbar-collapse collapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
+                    <a class="nav-link" routerLink="">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" routerLink="create-listing">Create a Listing</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
@@ -19,7 +19,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link " *ngIf="!name" href="auth/facebook">login</a>
-                    <a class="nav-link " *ngIf="name" href="profile/{{userId}}">{{name}}</a>
+                    <a class="nav-link " *ngIf="name" routerLink="profile/{{userId}}">{{name}}</a>
                 </li>
             </ul>
         </div>

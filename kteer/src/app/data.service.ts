@@ -24,6 +24,28 @@ export class DataService {
   loggedIn(){
     if(localStorage.getItem('id_token').length){
       return true
+    getListings() {
+        return this._http.get('/api/listings')
+        .map( result => result.json().data );
+    }
+
+    getListing(id) {
+        return this._http.get('/api/listing/' + id)
+        .map( result => result.json().data );
+    }
+
+    addListing(data) {
+        return this._http.post('/api/listings', JSON.stringify(data), this.options)
+        .map((res: Response) => res.json() )
+    }
+
+    getContractsForId(id) {
+        return this._http.get('/api/contracts/' + id)
+        .map( result => result.json().data )
+    }
+    getContracts() {
+        return this._http.get('/api/contracts')
+        .map( result => result.json().data )
     }
     else{
       return false

@@ -8,7 +8,7 @@ var session = require('express-session')
 var passport = require('passport');
 var path = require('path');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var config = require('./../secrets.js');
+var config = require('./../secrets.example.js');
 
 var api = require('./api');
 
