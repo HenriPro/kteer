@@ -25,7 +25,7 @@ export class CreateListingComponent implements OnInit {
                               description : this.description,
                               catagory : this.catagory,
                               pricing: this.pricing,
-                              owner: "henri"});
+                              owner: "Henri Pietilä"}).subscribe(result => console.log( result ));
   }
   
 

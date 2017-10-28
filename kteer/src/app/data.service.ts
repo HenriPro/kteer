@@ -29,8 +29,8 @@ export class DataService {
     }
 
     addListing(data) {
-        this._http.post('/api/listings', JSON.stringify(data), this.options)
-        .map((res: Response) => console.log(res.json()) )
+        return this._http.post('/api/listings', JSON.stringify(data), this.options)
+        .map((res: Response) => res.json() )
     }
 
     getContractsForId(id) {
