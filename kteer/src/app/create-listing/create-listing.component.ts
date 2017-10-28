@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,7 +16,7 @@ export class CreateListingComponent implements OnInit {
   public pricing: number;
   public ownerId: string;
 
-  constructor( private _dataService: DataService) {
+  constructor( private _dataService: DataService, private _router:Router) {
   }
 
   ngOnInit() {
@@ -25,7 +27,9 @@ export class CreateListingComponent implements OnInit {
                               description : this.description,
                               catagory : this.catagory,
                               pricing: this.pricing,
-                              owner: "Henri Pietilä"}).subscribe(result => console.log( result ));
+                              owner: "Henri Pietilä"}).subscribe(result => {
+                                                                      console.log( result );
+                                                                      this._router.navigate(['']) });
   }
   
 
