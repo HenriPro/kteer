@@ -94,9 +94,10 @@ router.get('/listings', (req, res) => {
 
 
 router.post('/listings', (req, res) => {
-    User.findOne({username: req.body.owner}).exec((err, owner) => {
+    console.log(req.body);
+    User.findOne({name: req.body.owner}).exec((err, owner) => {
         //checking if user exceeded the maximum limit of listings        
-        if(owner.listings.length > 10) {
+        if(owner.listing.length > 10) {
             response.data = [];
             response.message = "Listing maximum number exceeded!";
             response.status = 406;
@@ -117,7 +118,7 @@ router.post('/listings', (req, res) => {
                 } else {
                     User.update(
                         {username: owner.username},
-                        {listings: owner.listings.concat([newListing._id])}
+                        { $addToSet: { listings: newListing._id } }
                     )
 
                     response.data = [];
