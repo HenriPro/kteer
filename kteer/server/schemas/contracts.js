@@ -3,18 +3,25 @@ var mongoose= require ("mongoose");
 var mongoClient = require('mongodb').mongoClient;
 
 var ContractSchema = new mongoose.Schema({
-   userId:{
+    listingId: {
         type     : String,
-        required : true,
-    unique   : true
+        required : true
     },
-    estimatedHours:{
+    for: {
+        type: String,
+        required: true
+    },
+    estimatedHours: {
         type     : Number,
         required : true
     },
-    deadline:{
-        type :Date,
+    deadline: {
+        type :String,
         required :true
+    },
+    started: {
+        type: String, 
+        required: true
     }
 });
 
