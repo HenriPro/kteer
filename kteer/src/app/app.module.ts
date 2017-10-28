@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
@@ -9,8 +10,6 @@ import { HttpModule } from '@angular/http';
 // must import each bootstrap component here also down at imports
 import { AlertModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { CarouselModule } from 'ngx-bootstrap/carousel';
-import { CarouselConfig } from 'ngx-bootstrap/carousel';
 
 
 //Data service
@@ -52,13 +51,12 @@ const appRoutes: Routes = [
     // also add here
     AlertModule.forRoot(),
     AccordionModule.forRoot(),
-    CarouselModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [{provide: CarouselConfig, useValue: {interval: 1500, noPause: true}}, DataService],
+  providers: [DataService, HttpClientModule, NavbarComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

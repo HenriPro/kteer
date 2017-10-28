@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as myGlobals from './../globals';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +9,8 @@ import * as myGlobals from './../globals';
 export class NavbarComponent implements OnInit {
   isCollapsed: boolean = true;
   name: String;
-  userId: String;
+  userId: string;
+  loged = true;
 
 
   toggleCollapse(): void {
@@ -20,15 +20,19 @@ export class NavbarComponent implements OnInit {
   constructor( private http: HttpClient ) {}
 
   ngOnInit(): void {
+    this.getUser()
+  }
+  getUser(){
     // Make the HTTP request:
     this.http.get('/auth/userdata', {withCredentials: true}).subscribe(data => {
       // Read the result field from the JSON response.
       console.log(data);
+
+      localStorage.setItem('loggedIn', JSON.stringify(this.loged));
+      localStorage.setItem('userId', this.userId);
       this.userId = data['_id'];
-      myGlobals.setter('loggedIn', true);
-      myGlobals.setter('userId', this.userId);
+      localStorage.setItem('user-name', name);
       this.name = data['name'];
-      myGlobals.setter('name', this.name);
     },  err => {
       console.log('Something went wrong!', err);
     });

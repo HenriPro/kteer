@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import  { DataService } from '../data.service';
+
+
+
+@Component({
+	selector: 'app-profile',
+	templateUrl: './profile.component.html',
+	styleUrls: ['./profile.component.css'],
+	providers: []
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 @Component({
@@ -9,9 +19,11 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+	data: Object[] = [];
 
-  ngOnInit() {
-  }
+	constructor(private dataService: DataService) { }
 
+	ngOnInit() {
+
+	}
 }
