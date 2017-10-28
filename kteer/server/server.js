@@ -6,10 +6,13 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser'); //unsure if needed, may remove
 var session = require('express-session')
 var passport = require('passport');
+var path = require('path');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var config = require('./../secrets.js');
 
 var api = require('./api');
+
+const User = require('./schemas/users');
 
 var app = express();
 
@@ -28,8 +31,27 @@ passport.use(new FacebookStrategy({
   callbackURL: config.facebook.callbackURL
   },
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function () {
-      return done(null, profile);
+    User.findOne({ oauthID: profile.id }, function(err, user) {
+      if(err) {
+        console.log(err);  // handle errors!
+      }
+      if (!err && user !== null) {
+        done(null, user);
+      } else {
+        user = new User({
+          oAuth: profile.id,
+          name: profile.displayName,
+          created: Date.now()
+        });
+        user.save(function(err) {
+          if(err) {
+            console.log(err);  // handle errors!
+          } else {
+            console.log("saving user ...");
+            done(null, user);
+          }
+        });
+      }
     });
   }
 ));
@@ -76,10 +98,9 @@ db.once('open', function () {
 
 app.use('/api', api);
 
-app.get("*", () => {
-  //TODO
-})
-
+app.all("/*", function(req, res, next) {
+  res.sendFile( "index.html", { root: __dirname + "./../dist/" });
+});
 
 ////////////////////server////////////////////////////
 var port = process.env.PORT || 3000;//
