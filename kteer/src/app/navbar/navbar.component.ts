@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as myGlobals from './../globals';
 
 @Component({
   selector: 'app-navbar',
@@ -24,7 +25,10 @@ export class NavbarComponent implements OnInit {
       // Read the result field from the JSON response.
       console.log(data);
       this.userId = data['_id'];
+      myGlobals.setter('loggedIn', true);
+      myGlobals.setter('userId', this.userId);
       this.name = data['name'];
+      myGlobals.setter('name', this.name);
     },  err => {
       console.log('Something went wrong!', err);
     });
