@@ -9,7 +9,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { CarouselConfig } from 'ngx-bootstrap/carousel';
 
-
+//Data service
+import { DataService } from './data.service';
 
 // components are auto added when using angular cli
 import { AppComponent } from './app.component';
@@ -45,7 +46,7 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [{provide: CarouselConfig, useValue: {interval: 1500, noPause: true}}],
+  providers: [{provide: CarouselConfig, useValue: {interval: 1500, noPause: true}}, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
