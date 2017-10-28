@@ -17,10 +17,10 @@ const User = require('./schemas/users');
 var app = express();
 
 ////////////////auth part 1/////////////////
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user);
 });
-passport.deserializeUser(function(obj, done) {
+passport.deserializeUser(function (obj, done) {
   done(null, obj);
 });
 
@@ -29,10 +29,10 @@ passport.use(new FacebookStrategy({
   clientID: config.facebook.clientID,
   clientSecret: config.facebook.clientSecret,
   callbackURL: config.facebook.callbackURL
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOne({ oauthID: profile.id }, function(err, user) {
-      if(err) {
+},
+  function (accessToken, refreshToken, profile, done) {
+    User.findOne({ oAuth: profile.id }, function (err, user) {
+      if (err) {
         console.log(err);  // handle errors!
       }
       if (!err && user !== null) {
@@ -43,8 +43,8 @@ passport.use(new FacebookStrategy({
           name: profile.displayName,
           created: Date.now()
         });
-        user.save(function(err) {
-          if(err) {
+        user.save(function (err) {
+          if (err) {
             console.log(err);  // handle errors!
           } else {
             console.log("saving user ...");
@@ -62,9 +62,11 @@ app.use(morgan('tiny'));
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: 'LOLOLOLOLOLOL HAXORZZSS123' }));
+app.use(session({ secret: 'LOLOLOLOLOLOL HAXORZZSS123',
+  resave: true,
+  saveUninitialized: true }));
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session());  
 
 
 app.use(express.static(__dirname + '/../dist'));
@@ -80,6 +82,18 @@ app.get('/auth/facebook/callback',
   function (req, res) {
     res.redirect('/');
   });
+
+app.get('/auth/userdata', function (req, res) {
+  if (req.isAuthenticated()) {
+    console.log(req.session.passport.user);
+    res.json(req.session.passport.user);
+  } else {
+    console.log('not logged in');
+    res.json(0);
+  }
+  
+});
+
 
 app.get('/logout', function (req, res) {
   req.logout();
@@ -98,8 +112,8 @@ db.once('open', function () {
 
 app.use('/api', api);
 
-app.all("/*", function(req, res, next) {
-  res.sendFile( "index.html", { root: __dirname + "./../dist/" });
+app.all("/*", function (req, res, next) {
+  res.sendFile("index.html", { root: __dirname + "./../dist/" });
 });
 
 ////////////////////server////////////////////////////
