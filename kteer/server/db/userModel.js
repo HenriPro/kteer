@@ -3,29 +3,33 @@ var mongoose= require ("mongoose");
 var UserSchema = new mongoose.Schema({
 
 	oAuth:{
-		type     : String,
+		type     : Number,
 		required : true,
     unique   : true
 	},
+	name: {
+		type		 : String
+	},
+	created: Date,
 	aboutMe:{
-		type :String,
-		required :true
+		type 		 : String,
+		required : false
 	},
 	location:{
 		type     : String,
-		required : true
+		required : false
 	},
 	email:{
 		type     : String,
-		required : true
+		required : false
 	},
 	phoneNumber:{
 		type     : String,
-		required : true
+		required : false
 	},
 	listing :{
 	  type     : Array,
-		required : true
+		required : false
   }
 
 });
