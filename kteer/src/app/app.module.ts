@@ -6,6 +6,10 @@ import { HttpClientModule } from '@angular/common/http';
 // must import each bootstrap component here also down at imports
 import { AlertModule } from 'ngx-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CarouselConfig } from 'ngx-bootstrap/carousel';
+
+
 
 // components are auto added when using angular cli
 import { AppComponent } from './app.component';
@@ -35,12 +39,13 @@ const appRoutes: Routes = [
     // also add here
     AlertModule.forRoot(),
     AccordionModule.forRoot(),
+    CarouselModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [],
+  providers: [{provide: CarouselConfig, useValue: {interval: 1500, noPause: true}}],
   bootstrap: [AppComponent]
 })
 export class AppModule {
