@@ -18,10 +18,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ListingsEntryComponent } from './listings-entry/listings-entry.component';
+import { ListingDetailsComponent } from './listing-details/listing-details.component';
 
 const appRoutes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'details/:id', component: ListingDetailsComponent}
   // { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -32,7 +34,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     NavbarComponent,
     LandingPageComponent,
-    ListingsEntryComponent
+    ListingsEntryComponent,
+    ListingDetailsComponent
   ],
   imports: [
     BrowserModule,

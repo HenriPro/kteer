@@ -63,6 +63,21 @@ router.post('/users', (req, res) => {
     })
 })
 
+
+router.get('/listings/:id', (req, res) => {
+    console.log(req.params)
+    Listing.find({_id: req.params.id}).exec((err, listing) => {
+        if(err) {
+            sendError(err, res);
+        } else {
+            response.status = 200;
+            response.message = "";
+            response.data = listing;
+            res.send(response);
+        }
+    })
+})
+
 router.get('/listings', (req, res) => {
     Listing.find().exec((err, allListings) => {
         if(err) {
@@ -75,6 +90,8 @@ router.get('/listings', (req, res) => {
         }
     })
 })
+
+
 
 router.post('/listings', (req, res) => {
     User.findOne({username: req.body.owner}).exec((err, owner) => {
@@ -113,6 +130,19 @@ router.post('/listings', (req, res) => {
     })
 })
 
+router.get('/contracts/:id', (req, res) => {
+    Contract.find({listingId: req.params.id}).exec((err, conts) => {
+        if(err) {
+            sendError(err, res);
+        } else {
+            response.status = 200;
+            response.message = "";
+            response.data = conts;
+            res.send(response);
+        }
+    })
+})
+
 router.get('/contracts', (req, res) => {
     Contract.find().exec((err, allContracts) => {
         if(err) {
@@ -125,6 +155,8 @@ router.get('/contracts', (req, res) => {
         }
     })
 })
+
+
 
 router.post('/contracts', (req, res) => {
     Listing.findOne({_id: req.body.listingId}).exec((err, listing) => {
